@@ -15,8 +15,8 @@ class Settings(BaseSettings):
         env_nested_delimiter="__",
     )
 
-    discord_token: SecretStr | None = None
-    openai_api_key: SecretStr | None = None
+    discord_token: SecretStr
+    openai_api_key: SecretStr
 
     # Discord Settings
     discord_enable_voice_client: bool = True
