@@ -30,6 +30,10 @@ dependencies = [
     "gradio-tools>=0.0.9",
     "rapidfuzz>=3.12.1",
     "gradio-client>=1.7.0",
+    "langgraph-cli>=0.1.76",
+    "langgraph-api>=0.0.30",
+    "elasticsearch>=8.17.2",
+    "notebook>=7.3.2",
 ]
 
 [dependency-groups]
@@ -40,7 +44,6 @@ dev = [
     "pytest-asyncio>=0.25.2",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "mike>=2.1.3",
 ]
 
 [build-system]
@@ -51,6 +54,7 @@ build-backend = "hatchling.build"
 start-grug = "grug.__main__:run_main"
 
 [tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope="function"
 asyncio_mode = "auto"
 minversion = "6.0"
 addopts = "-ra -q"

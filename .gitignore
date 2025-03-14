@@ -4,6 +4,7 @@
 !**/data/vector_store_documents/.gitkeep
 
 **/config/secrets.env
+.langgraph_api
 
 ## Default Ignore List ##
 # Byte-compiled / optimized / DLL files

@@ -1,0 +1,8 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "dev_grug": "./grug/ai_agent.py:graph"
+  },
+  "env": "./config/secrets.env",
+  "python_version": "3.12"
+}

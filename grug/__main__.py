@@ -3,7 +3,7 @@ import contextlib
 import anyio
 from loguru import logger
 
-from grug.db import init_db
+from grug.db import run_db_migrations
 from grug.discord_client import DiscordClient
 from grug.scheduler import start_scheduler
 from grug.settings import settings
@@ -21,7 +21,7 @@ async def main():
 
     logger.info("Starting Grug...")
 
-    init_db()
+    run_db_migrations()
 
     async with anyio.create_task_group() as tg:
         tg.start_soon(DiscordClient().start, settings.discord_token.get_secret_value())
