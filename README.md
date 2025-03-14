@@ -78,6 +78,18 @@ following these steps:
    ```
 8. TODO: create a config.env file for simple adjustments users can make before diving into changing any of the code
 
+### Explore Grug's Langgraph graph
+
+Grug uses Langgraph as the underlying framework for its language model interactions. You can explore the graph and
+see how Grug interacts with through langsmith by running the following command:
+
+```bash
+uv run langgraph dev
+```
+
+which will open a web interface showing you the grug ReAct agent graph and allow you to interact with it.  see
+[Langgraph Docs](https://langchain-ai.github.io/langgraph/) for more information.
+
 ### Running with Docker
 
 To start the entire application locally with docker run:
