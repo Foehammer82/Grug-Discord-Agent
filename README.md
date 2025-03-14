@@ -15,57 +15,78 @@ responses and interactions.
 
 - **Text Responses**: Can respond in discord chats when users @mention the agent, or when DM'd.
 - **Listens In Voice Chat**: Listens to voice chat and responds intelligently.
+- **AoN Integration**: Can look up rules and information from the Archives of Nethys (AoN) for Pathfinder.
+- **Dice Roller**: Can roll dice and provide results in chat.
+- **Image Generation**: Can generate images based on text prompts.
 
 ## Adding Grug to Your Server
 
 TODO: instructions for how to sign up and use the currently deployed Grug (not ready yet)
 
-## Self Hosting
-
-TODO: instructions for how to self-host
-
-## Planned Features
-
-- [ ] add docs for self hosting
-- [ ] add docs for general usage and features of Grug
-- [ ] rules lookup
-    - users must upload their own rulebooks and content as that is typically closed source
-    - some tools will be provided out of the box, such as AoN for Pathfinder, and
-    - online resources that are open for use:
-        - https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf
-        - AoN for Pathfinder
-- [x] dice roller
-- [ ] music player
-    - youtube search code: https://github.com/joetats/youtube_search/blob/master/youtube_search/__init__.py
-    - youtube downloader: https://github.com/yt-dlp/yt-dlp
-    - can use the above two to find and obtain music and then can create an agent to stream it into a voice channel
-- [ ] session notes (by listening to the play session)
-- [ ] scheduling and reminders
-    - [ ] ability to send reminder for the upcoming session
-    - [ ] food tracking feature (for in-person sessions where there is a rotation of who brings food)
-    - [ ] ability to send reminder for who is bringing food
-    - [ ] scheduling feature for when the next session will be, and who is available (find a time that works best for
-      everyone)
+## [Self-Hosting Grug](docs/self_hosting.md)
 
 ## Local Development
 
-### Documentation
+We welcome contributions! If you would like to contribute to Grug, or just want to run it locally, you can do so by
+following these steps:
 
-We use MkDocs Material published to GitHub Pages for our documentation. We use [Mike]() to handle documentation
-versioning which comes with a few different commands when serving the docs locally, i.e:
+### Prerequisites
+
+- [Install uv](https://docs.astral.sh/uv/getting-started/installation/#installing-uv) for package management and python
+  version/environment management.
+- [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) for containerization.
+  > NOTE: while docker desktop is free for personal use, if you'd rather only
+  > [install docker](https://docs.docker.com/get-started/get-docker/) itself you can do that too. Note that you will
+  > also need [docker-compose](https://docs.docker.com/compose/install/) to run everything in this project.
+- [Install Git](https://git-scm.com/)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone
+   ```
+2. Change into the directory:
+   ```bash
+   cd grug
+   ```
+3. setup your python environment:
+   ```bash
+   uv sync
+   ```
+4. Start the Postgres database:
+   ```bash
+   docker-compose up -d postgres
+   ```
+   > NOTE: this will expose postgres on port 5432 by default. The default username and password are `postgres` and
+   > `postgres`. you can adjust all of this with ENV variables.
+
+5. Set up your configuration by following the instructions in the `./config/secrets.template.env` file.
+   > NOTE: you will need a Discord bot token and an OpenAI API key to run Grug. You can get a Discord bot token by
+   > creating a new bot application in the [Discord Developer Portal](https://discord.com/developers/applications)
+   > and an OpenAI API from the [OpenAI Dashboard](https://platform.openai.com/api-keys). Everything with discord is
+   > free, OpenAI costs can vary depending on usage and which model you choose to use. I have been using the
+   > GPT-4o-mini and spend less than $5 a month on it for basic personal use, but YMMV.
+
+6. Run the tests:
+   ```bash
+   uv run test
+   ```
+7. Run the application:
+   ```bash
+   uv run grug
+   ```
+8. TODO: create a config.env file for simple adjustments users can make before diving into changing any of the code
+
+### Running with Docker
+
+To start the entire application locally with docker run:
 
 ```bash
-uv run mike serve
+docker compose up -d
 ```
 
-## References
-
-- TTS:
-    - [F5-TTS Hugging Face Space](https://huggingface.co/spaces/mrfakename/E2-F5-TTS)
-    - [F5-TTS source code](https://github.com/SWivid/F5-TTS)
-- STT:
-    - https://github.com/Vaibhavs10/insanely-fast-whisper
-    - https://github.com/systran/faster-whisper
-- Self-Hostable AI Tools and Models:
-    - https://technotim.live/posts/ai-stack-tutorial/
-    - https://github.com/AUTOMATIC1111/stable-diffusion-webui
+> this will also start the f5tts server which will expose a web server accessible at `http://localhost:7860` where you
+> can test out the TTS capabilities. It is dependent on having an NVIDIA GPU and your system being configured to
+> allow Docker to have access to the GPU, which typically requires extra setup. If this raises errors, just start the
+> application service with `docker compose up -d application` and it will run without the TTS server.

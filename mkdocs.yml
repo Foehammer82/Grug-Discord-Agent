@@ -70,7 +70,3 @@ markdown_extensions:
 
 plugins:
   - search
-
-extra:
-  version:
-    provider: mike
