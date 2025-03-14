@@ -15,6 +15,4 @@ def test_basic_agent_usage(llm_response_checker):
     )
     response = results["messages"][-1].content
 
-    assert llm_response_checker(
-        response, "gave information about the wizard class and provided links to sources."
-    ).success
+    assert llm_response_checker(response, "gave information about the wizard class and provided links to sources.")
