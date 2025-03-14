@@ -1,7 +1,6 @@
 # TODO
 
 - [ ] add docs for self hosting
-- [ ] add docs for general usage and features of Grug
 - [ ] rules lookup
     - users must upload their own rulebooks and content as that is typically closed source
     - some tools will be provided out of the box, such as AoN for Pathfinder, and
