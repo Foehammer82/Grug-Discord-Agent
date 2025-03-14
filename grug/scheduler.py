@@ -32,6 +32,7 @@ scheduler = AsyncScheduler(
         ),
     ),
 )
+_scheduler_is_started = False
 
 
 async def start_scheduler(discord_bot_startup_timeout: int = 15):

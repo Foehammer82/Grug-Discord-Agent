@@ -15,6 +15,9 @@ responses and interactions.
 
 - **Text Responses**: Can respond in discord chats when users @mention the agent, or when DM'd.
 - **Listens In Voice Chat**: Listens to voice chat and responds intelligently.
+- **AoN Integration**: Can look up rules and information from the Archives of Nethys (AoN) for Pathfinder.
+- **Dice Roller**: Can roll dice and provide results in chat.
+- **Image Generation**: Can generate images based on text prompts.
 
 ## Adding Grug to Your Server
 
