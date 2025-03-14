@@ -23,7 +23,9 @@ responses and interactions.
 
 TODO: instructions for how to sign up and use the currently deployed Grug (not ready yet)
 
-## Self Hosting
+## Documentation
+
+- [Self-Hosting Grug](docs/self_hosting.md)
 
 TODO: instructions for how to self-host
 
