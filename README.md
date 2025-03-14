@@ -23,30 +23,7 @@ responses and interactions.
 
 TODO: instructions for how to sign up and use the currently deployed Grug (not ready yet)
 
-## Documentation
-
-- [Self-Hosting Grug](docs/self_hosting.md)
-
-TODO: instructions for how to self-host
-
-## Planned Features
-
-- [ ] add docs for self hosting
-- [ ] add docs for general usage and features of Grug
-- [ ] rules lookup
-    - users must upload their own rulebooks and content as that is typically closed source
-    - some tools will be provided out of the box, such as AoN for Pathfinder, and
-    - online resources that are open for use:
-        - https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf
-        - AoN for Pathfinder
-- [x] dice roller
-- [ ] session notes (by listening to the play session)
-- [ ] scheduling and reminders
-    - [ ] ability to send reminder for the upcoming session
-    - [ ] food tracking feature (for in-person sessions where there is a rotation of who brings food)
-    - [ ] ability to send reminder for who is bringing food
-    - [ ] scheduling feature for when the next session will be, and who is available (find a time that works best for
-      everyone)
+## [Self-Hosting Grug](docs/self_hosting.md)
 
 ## Local Development
 
@@ -81,14 +58,14 @@ following these steps:
    ```bash
    docker-compose up -d postgres
    ```
-   > NOTE: this will expose postgres on port 5432 by default.  The default username and password are `postgres` and
-   > `postgres`.  you can adjust all of this with ENV variables.
+   > NOTE: this will expose postgres on port 5432 by default. The default username and password are `postgres` and
+   > `postgres`. you can adjust all of this with ENV variables.
 
 5. Set up your configuration by following the instructions in the `./config/secrets.template.env` file.
    > NOTE: you will need a Discord bot token and an OpenAI API key to run Grug. You can get a Discord bot token by
    > creating a new bot application in the [Discord Developer Portal](https://discord.com/developers/applications)
-   > and an OpenAI API from the [OpenAI Dashboard](https://platform.openai.com/api-keys).  Everything with discord is
-   > free, OpenAI costs can vary depending on usage and which model you choose to use.  I have been using the
+   > and an OpenAI API from the [OpenAI Dashboard](https://platform.openai.com/api-keys). Everything with discord is
+   > free, OpenAI costs can vary depending on usage and which model you choose to use. I have been using the
    > GPT-4o-mini and spend less than $5 a month on it for basic personal use, but YMMV.
 
 6. Run the tests:
@@ -102,6 +79,7 @@ following these steps:
 8. TODO: create a config.env file for simple adjustments users can make before diving into changing any of the code
 
 ### Running with Docker
+
 To start the entire application locally with docker run:
 
 ```bash
@@ -109,6 +87,6 @@ docker compose up -d
 ```
 
 > this will also start the f5tts server which will expose a web server accessible at `http://localhost:7860` where you
-> can test out the TTS capabilities.  It is dependent on having an NVIDIA GPU and your system being configured to
-> allow Docker to have access to the GPU, which typically requires extra setup.  If this raises errors, just start the
+> can test out the TTS capabilities. It is dependent on having an NVIDIA GPU and your system being configured to
+> allow Docker to have access to the GPU, which typically requires extra setup. If this raises errors, just start the
 > application service with `docker compose up -d application` and it will run without the TTS server.
