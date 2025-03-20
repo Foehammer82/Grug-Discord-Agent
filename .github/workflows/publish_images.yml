@@ -59,14 +59,14 @@ jobs:
       - name: Build and Push App Image
         run: |
           IMAGE_NAME=$(echo ghcr.io/${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-          docker build -t $IMAGE_NAME:${{ steps.tag_version.outputs.new_tag }} -t latest .
+          docker build -t $IMAGE_NAME:${{ steps.tag_version.outputs.new_tag }} -t $IMAGE_NAME:latest .
           docker push -a $IMAGE_NAME
           docker save $IMAGE_NAME:${{ steps.tag_version.outputs.new_tag }} -o grug_image_${{ steps.tag_version.outputs.new_tag }}.tar
 
       - name: Build and Push Postgres Image
         run: |
           IMAGE_NAME=$(echo ghcr.io/${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-          docker build -f postgres.Dockerfile -t $IMAGE_NAME-postgres:${{ steps.tag_version.outputs.new_tag }} -t latest .
+          docker build -f postgres.Dockerfile -t $IMAGE_NAME-postgres:${{ steps.tag_version.outputs.new_tag }} -t $IMAGE_NAME-postgres:latest .
           docker push -a $IMAGE_NAME-postgres
 
       # https://github.com/ncipollo/release-action
