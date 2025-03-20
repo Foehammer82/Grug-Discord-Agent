@@ -49,5 +49,4 @@ jobs:
         run: uv sync
       - name: Deploy to GitHub Pages
         run: |
-          uv run mike deploy --push --update-aliases ${{ steps.tag_version.outputs.previous_tag  }} latest
-          uv run mike set-default --push latest
+          uv run mkdocs gh-deploy --force
