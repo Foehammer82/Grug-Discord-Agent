@@ -1,12 +1,13 @@
+import json
+from datetime import UTC, datetime
+from typing import Literal, Optional
+
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.date import DateTrigger
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
-from typing import Literal, Optional
-from datetime import datetime, UTC
-import json
-from langchain_core.messages import HumanMessage, SystemMessage
 from loguru import logger
 from pydantic import BaseModel, Field, computed_field
 
@@ -28,9 +29,13 @@ class ScheduleResponse(BaseModel):
     @property
     def schedule(self) -> str | datetime:
         """Returns the schedule in the appropriate format."""
+        # Validation
         if self.clarification:
             raise ValueError(f"Clarification needed: {self.clarification}")
+        if not self.schedule_value:
+            raise ValueError("No schedule value provided.")
 
+        # Return the schedule in the appropriate format
         if self.schedule_type == "cron":
             return self.schedule_value
         else:
