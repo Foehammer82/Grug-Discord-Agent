@@ -1,5 +1,7 @@
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
+LABEL org.opencontainers.image.description = "Grug is a self-hosted Discord AI Agent designed to assist groups who play TTRPGs."
+
 # Install the project into /app
 WORKDIR /app
 

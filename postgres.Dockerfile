@@ -1,6 +1,8 @@
 # Stage 1: Build
 FROM postgres:17-alpine AS build
 
+LABEL org.opencontainers.image.description = "A PostgreSQL image with pgvector and pgmq extensions pre-installed."
+
 ENV PGUSER=postgres
 
 RUN apk --no-cache add python3 pipx make gcc musl-dev clang19 llvm
