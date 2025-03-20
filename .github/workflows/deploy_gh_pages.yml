@@ -12,26 +12,18 @@ on:
       - 'mkdocs.yml'
   workflow_call:
 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # https://github.com/marketplace/actions/github-tag
-      - name: Get Current Release Tag Version
-        id: tag_version
-        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: ""
-          dry_run: 'true'
-      - run: |
-          echo "Current Release Tag Version: ${{ steps.tag_version.outputs.previous_tag  }}"
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
@@ -39,14 +31,5 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      # https://github.com/astral-sh/setup-uv
-      - name: Install uv
-        uses: astral-sh/setup-uv@4db96194c378173c656ce18a155ffc14a9fc4355 #v5
-        with:
-          version: "0.5.24"
-          enable-cache: true
-      - name: Install Dependencies
-        run: uv sync
-      - name: Deploy to GitHub Pages
-        run: |
-          uv run mkdocs gh-deploy --force
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --force
