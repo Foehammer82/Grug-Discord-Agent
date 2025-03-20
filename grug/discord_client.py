@@ -473,6 +473,9 @@ class DiscordClient(discord.Client):
                         )
                     )
 
+                # Give the agent the current timestamp
+                messages.append(SystemMessage(f"The current epoch timestamp is {datetime.now().timestamp()}"))
+
                 # Add the message that the user sent
                 messages.append(HumanMessage(message.content))
 
@@ -566,3 +569,6 @@ class InterceptLogHandler(logging.Handler):
                 depth += 1
 
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+
+
+discord_client: DiscordClient = DiscordClient()

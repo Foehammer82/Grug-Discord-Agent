@@ -9,6 +9,7 @@ from langgraph.store.memory import BaseStore, InMemoryStore
 from grug.ai_tools.dice_roller import roll_dice
 from grug.ai_tools.image_generation import generate_ai_image
 from grug.ai_tools.information_search import search_archives_of_nethys
+from grug.ai_tools.reminders import set_reminder
 from grug.settings import settings
 
 
@@ -25,11 +26,7 @@ def get_react_agent(
             max_retries=2,
             openai_api_key=settings.openai_api_key,
         ),
-        tools=[
-            roll_dice,
-            search_archives_of_nethys,
-            generate_ai_image,
-        ],
+        tools=[roll_dice, search_archives_of_nethys, generate_ai_image, set_reminder],
         checkpointer=checkpointer,
         store=store,
         prompt=orjson.dumps(
@@ -38,6 +35,7 @@ def get_react_agent(
                     f"your name is {settings.ai_name}.",
                     "You are an expert in Pathfinder 2E, and should leverage the archives of nethys for ALL pathfinder information.",
                     "You should respond conversationally, but remember to format your responses in markdown when providing information and details.",
+                    "When the user is requesting a reminder or scheduling an event, ALWAYS use the tool, even if they just asked you to set a reminder.",
                 ],
                 "secondary_instructions": settings.ai_instructions if settings.ai_instructions else "",
             }

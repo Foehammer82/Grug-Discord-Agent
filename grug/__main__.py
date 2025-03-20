@@ -4,7 +4,7 @@ import anyio
 from loguru import logger
 
 from grug.db import run_db_migrations
-from grug.discord_client import DiscordClient
+from grug.discord_client import discord_client
 from grug.scheduler import start_scheduler
 from grug.settings import settings
 
@@ -24,7 +24,7 @@ async def main():
     run_db_migrations()
 
     async with anyio.create_task_group() as tg:
-        tg.start_soon(DiscordClient().start, settings.discord_token.get_secret_value())
+        tg.start_soon(discord_client.start, settings.discord_token.get_secret_value())
         tg.start_soon(start_scheduler)
 
     logger.info("Grug has shut down...")
