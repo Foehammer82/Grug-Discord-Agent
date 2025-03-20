@@ -36,11 +36,11 @@ repos:
           - --install-types
           - --non-interactive
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.10.0
+    rev: v0.11.0
     hooks:
       - id: ruff
         exclude: ^alembic/
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.6.6
+    rev: 0.6.8
     hooks:
       - id: uv-lock
