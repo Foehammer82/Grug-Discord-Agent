@@ -11,7 +11,6 @@ edit_uri: ""
 
 theme:
   name: material
-  custom_dir: overrides
   favicon: /assets/favicon.ico
   icon:
     repo: fontawesome/brands/github
