@@ -1,7 +1,7 @@
 # Stage 1: Build
 FROM postgres:17-alpine AS build
 
-LABEL org.opencontainers.image.description = "A PostgreSQL image with pgvector and pgmq extensions pre-installed."
+LABEL org.opencontainers.image.description "A PostgreSQL image with pgvector and pgmq extensions pre-installed."
 
 ENV PGUSER=postgres
 
